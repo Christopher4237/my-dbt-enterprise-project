@@ -1,0 +1,9 @@
+models:
+  - name: tickers
+    description: Ticker data
+    columns:
+      - name: ticker
+        data_tests:
+          - unique
+          - not_null
+      
