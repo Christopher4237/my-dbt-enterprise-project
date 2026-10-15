@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: stocks_data
+    database: stocks_data
+    schema: source
+    tables:
+      - name: dividends
+        description: Dividends Data for A tickers
+      - name: splits
+        description: Split Data for A tickers
+      - name: tickers
+        description: Ticker Data for A tickers
