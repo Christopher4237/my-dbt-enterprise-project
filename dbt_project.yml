@@ -40,3 +40,6 @@ models:
     # Applies to all files under models/example/
     example:
       +materialized: table
+    int:
+      +database: stocks_data
+      +schema: int
