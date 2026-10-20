@@ -5,7 +5,7 @@ with split_data as (
         split_from,
         split_to,
         adjustment_type, 
-        historical_adjustment_factor
+        round(historical_adjustment_factor, 3) as historical_adjustment_factor
 
     from {{ source('stocks_data', 'splits') }}
 

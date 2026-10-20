@@ -43,3 +43,6 @@ models:
     int:
       +database: stocks_data
       +schema: int
+    marts:
+      +database: stocks_data
+      +schema: marts
