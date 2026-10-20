@@ -11,7 +11,7 @@ with tickers as (
         cik,
         composite_figi,
         share_class_figi,
-        last_updated_utc
+        substring(last_updated_utc, 0, 10) as last_updated_utc_date
 
         from {{ source('stocks_data', 'tickers') }}
 
