@@ -1,9 +1,94 @@
 models:
   - name: tickers
     description: Ticker data
+    config:
+      contract: 
+        enforced: true
     columns:
       - name: ticker
+        data_type: string
         data_tests:
           - unique
           - not_null
-      
+      - name: name
+        data_type: string
+      - name: market
+        data_type: string
+      - name: locale
+        data_type: string
+      - name: primary_exchange
+        data_type: string
+      - name: type
+        data_type: string
+      - name: active
+        data_type: string
+      - name: currency_name
+        data_type: string
+      - name: last_updated_utc_date
+        data_type: string
+
+  - name: dividends
+    description: Dividend data
+    config:
+      contract: 
+        enforced: true
+    columns:
+      - name: ticker
+        data_type: string
+        data_tests:
+          - not_null 
+          - relationships:
+              arguments: 
+                to: ref('tickers')
+                field: ticker
+                config: 
+                  warn_if: ">1000"
+                  error_if: ">50000"
+      - name: record_date
+        data_type: string
+      - name: pay_date
+        data_type: string
+      - name: ex_dividend_date
+        data_type: string
+      - name: frequency
+        data_type: string
+      - name: cash_amount
+        data_type: string
+      - name: currency
+        data_type: string
+      - name: distribution_type
+        data_type: string
+      - name: declaration_date
+        data_type: string
+      - name: historical_adjustment_factor
+        data_type: string
+      - name: split_adjusted_cash_amount
+        data_type: string
+
+  - name: splits
+    description: Splits data
+    config:
+      contract: 
+        enforced: true
+    columns:
+      - name: ticker
+        data_type: string
+        data_tests:
+          - not_null 
+          - relationships:
+              arguments:
+                to: ref('tickers')
+                field: ticker
+                config: 
+                  warn_if: ">1000"
+                  error_if: ">50000"
+      - name: execution_date
+        data_type: string
+      - name: split_from
+        data_type: string
+      - name: split_to
+        data_type: string
+      - name: adjustment_type
+        data_type: string
+      - name: historical_adjustment_factor
+        data_type: double
