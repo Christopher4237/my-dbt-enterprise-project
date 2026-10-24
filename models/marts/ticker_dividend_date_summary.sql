@@ -1,4 +1,8 @@
-with dividends_date_info as (
+with tickers as (
+    select * from {{ ref('tickers') }}
+),
+
+dividends_date_info as (
     select * from {{ ref('dividends_date_info') }}
 ),
 
@@ -64,7 +68,7 @@ select distinct
 
 
 select 
-    dividend_date_summary.ticker,
+    tickers.ticker,
 
     dividend_date_summary.min_days_to_pay_dividend_after_cutoff,
     dividend_date_summary.avg_days_to_pay_dividend_after_cutoff,
@@ -88,8 +92,10 @@ select
     dividend_date_finish.last_ex_dividend_date
 
 
-    from dividend_date_summary
+    from tickers
+    
+    left join dividend_date_summary using (ticker)
 
-    join dividend_date_start using (ticker)
+    left join dividend_date_start using (ticker)
 
-    join dividend_date_finish using (ticker)
+    left join dividend_date_finish using (ticker)

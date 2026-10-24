@@ -11,3 +11,11 @@ sources:
         description: Split Data for A tickers
       - name: tickers
         description: Ticker Data for A tickers
+      - name: exchanges
+        description: Exchange Data
+      - name: floats
+        description: Float Data for A tickers
+      - name: short_interests
+        description: Short Interest Data for A tickers
+      - name: short_volumes
+        description: Short Volumes Data for A tickers
