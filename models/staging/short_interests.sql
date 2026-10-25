@@ -7,3 +7,5 @@ select
     settlement_date
 
 from {{ source('stocks_data', 'short_interests') }}
+
+where ticker like 'A%'
