@@ -16,6 +16,6 @@ select
     adf_short_volume,
     adf_short_volume_exempt
 
-from {{ source('stocks_data', 'short_volumes') }}
+from {{ source('stocks_data', 'short_volume') }}
 
 where ticker like 'A%'

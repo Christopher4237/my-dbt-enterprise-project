@@ -15,7 +15,11 @@ sources:
         description: Exchange Data
       - name: floats
         description: Float Data for A tickers
-      - name: short_interests
+      - name: short_interest
         description: Short Interest Data for A tickers
-      - name: short_volumes
+      - name: short_volume
         description: Short Volumes Data for A tickers
+      - name: condition_codes
+        description: Condition Codes Data
+      - name: ticker_types
+        description: Ticker Types Data

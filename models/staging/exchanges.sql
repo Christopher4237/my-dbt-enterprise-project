@@ -1,8 +1,6 @@
-{{
-    config(
-        enabled=false
-    )
-}}
+with exchanges as (
+    select * from {{ source('stocks_data', 'exchanges') }}
+)
 
 select 
     id as exhange_id,
@@ -13,5 +11,5 @@ select
     acronym, 
     mic,
     operating_mic
-from {{ source('stocks_data', 'exchanges') }}
+from exchanges
 
