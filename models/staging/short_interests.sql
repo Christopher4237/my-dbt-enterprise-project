@@ -6,6 +6,6 @@ select
     days_to_cover, 
     settlement_date
 
-from {{ source('stocks_data', 'short_interests') }}
+from {{ source('stocks_data', 'short_interest') }}
 
 where ticker like 'A%'
