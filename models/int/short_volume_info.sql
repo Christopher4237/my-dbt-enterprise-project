@@ -5,23 +5,23 @@ with short_volumes as (
 select 
     ticker,
     date,
+    first(date) over (partition by ticker order by date) 
+    as first_short_volume_date_for_ticker,
+    last(date) over (partition by ticker order by date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) 
+    as most_recent_short_volume_date_for_ticker,
     total_volume,
     short_volume,
+    exempt_volume,
+    non_exempt_volume,
     short_volume_ratio,
-    sum(total_volume) over (partition by ticker order by date) as running_total_volume,
-    sum(short_volume) over (partition by ticker order by date) as running_short_volume,
-    round(running_short_volume / running_total_volume, 3) as running_short_volume_ratio,
-
-    sum(nyse_short_volume) over (partition by ticker order by date) as running_total_nyse_short_volume,
-    round(running_total_nyse_short_volume / running_short_volume, 3) as running_short_volume_that_is_nyse_ratio,
-
-    sum(nasdaq_carteret_short_volume) over (partition by ticker order by date) as running_total_nasdaq_carteret_short_volume,
-    round(running_total_nasdaq_carteret_short_volume / running_short_volume, 3) as running_short_volume_that_is_nasdaq_carteret_ratio,
-
-    sum(nasdaq_chicago_short_volume) over (partition by ticker order by date) as running_total_nasdaq_chicago_short_volume,
-    round(running_total_nasdaq_chicago_short_volume / running_short_volume, 3) as running_short_volume_that_is_nasdaq_chicago_ratio,
-
-    sum(adf_short_volume) over (partition by ticker order by date) as running_total_adf_short_volume,
-    round(running_total_adf_short_volume / running_short_volume, 3) as running_short_volume_that_is_adf_ratio
+    nyse_short_volume,
+    nyse_short_volume_exempt,
+    nasdaq_carteret_short_volume,
+    nasdaq_carteret_short_volume_exempt,
+    nasdaq_chicago_short_volume,
+    nasdaq_chicago_short_volume_exempt,
+    adf_short_volume,
+    adf_short_volume_exempt
 
 from short_volumes
+order by ticker, date
