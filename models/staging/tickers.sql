@@ -1,7 +1,8 @@
 {{
     config(
         materialized='incremental',
-        unique_key='ticker'
+        unique_key='ticker',
+        on_schema_change='append_new_columns'
     )
 }}
 

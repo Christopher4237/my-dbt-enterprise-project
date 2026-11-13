@@ -1,8 +1,8 @@
 {{
     config(
         materialized='incremental',
-        unique_key=['ticker', 'execution_date'],
-        on_schema_change = 'append_new_columns'
+        unique_key=['ticker', 'execution_date', 'adjustment_type', 'split_to'],
+        on_schema_change='append_new_columns'
     )
 }}
 
@@ -14,7 +14,7 @@ with split_data as (
         split_from,
         split_to,
         adjustment_type, 
-        round(historical_adjustment_factor, 3) as historical_adjustment_factor
+        round(try_cast(historical_adjustment_factor as double), 3) as historical_adjustment_factor
 
     from {{ source('stocks_data', 'splits') }}
 
