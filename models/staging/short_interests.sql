@@ -5,15 +5,18 @@
     )
 }}
 
+with short_interests as (
 
-select
+    select
+        ticker,
+        short_interest,
+        avg_daily_volume,
+        days_to_cover, 
+        settlement_date
 
-    ticker,
-    short_interest,
-    avg_daily_volume,
-    days_to_cover, 
-    settlement_date
+    from {{ source('stocks_data', 'short_interest') }}
 
-from {{ source('stocks_data', 'short_interest') }}
+    where ticker like 'A%'
 
-where ticker like 'A%'
+)
+select * from short_interests
