@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='ticker'
+    )
+}}
+
 with tickers as (
     select
         ticker, 

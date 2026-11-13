@@ -1,3 +1,12 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key=['ticker', 'execution_date'],
+        on_schema_change = 'append_new_columns'
+    )
+}}
+
+
 with split_data as (
     select
         ticker,
