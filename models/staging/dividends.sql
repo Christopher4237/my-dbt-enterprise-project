@@ -1,3 +1,13 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key=['ticker', 'record_date', 'pay_date', 'ex_dividend_date', 'frequency', 'cash_amount',
+         'declaration_date', 'historical_adjustment_factor'],
+        on_schema_change = 'append_new_columns'
+    )
+}}
+
+
 with dividend_data as (
     select 
         ticker, 

@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key=['ticker', 'settlement_date']
+    )
+}}
+
+
 select
 
     ticker,

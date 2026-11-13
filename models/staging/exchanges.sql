@@ -1,9 +1,17 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='exchange_id'
+    )
+}}
+
+
 with exchanges as (
     select * from {{ source('stocks_data', 'exchanges') }}
 )
 
 select 
-    id as exhange_id,
+    id as exchange_id,
     type,
     asset_class,
     locale,

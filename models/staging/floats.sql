@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='ticker'
+    )
+}}
+
+
 select 
     ticker,
     free_float,
