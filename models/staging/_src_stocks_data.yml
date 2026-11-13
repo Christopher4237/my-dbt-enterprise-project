@@ -4,22 +4,326 @@ sources:
   - name: stocks_data
     database: stocks_data
     schema: source
+    description: Source datasets containing market data including stock tickers, historical splits, dividends, condition codes, and exchange metadata.
     tables:
-      - name: dividends
-        description: Dividends Data for A tickers
-      - name: splits
-        description: Split Data for A tickers
       - name: tickers
-        description: Ticker Data for A tickers
-      - name: exchanges
-        description: Exchange Data
-      - name: floats
-        description: Float Data for A tickers
-      - name: short_interest
-        description: Short Interest Data for A tickers
-      - name: short_volume
-        description: Short Volumes Data for A tickers
+        description: Table containing financial ticker symbol profiles and metadata.
+        columns:
+          - name: ticker
+            description: Ticker symbol identifier.
+            data_type: string
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: Official asset or company name.
+            data_type: string
+          - name: market
+            description: Category of market asset.
+            data_type: string
+          - name: locale
+            description: Market locale code.
+            data_type: string
+          - name: primary_exchange
+            description: Primary listing exchange code.
+            data_type: string
+          - name: type
+            description: Type of financial security.
+            data_type: string
+          - name: active
+            description: Ticker active status indicator.
+            data_type: string
+          - name: currency_name
+            description: Trading currency denomination.
+            data_type: string
+          - name: cik
+            description: SEC Central Index Key number.
+            data_type: string
+          - name: composite_figi
+            description: Composite Financial Instrument Global Identifier.
+            data_type: string
+          - name: share_class_figi
+            description: Share class level Financial Instrument Global Identifier.
+            data_type: string
+          - name: last_updated_utc
+            description: Record last update timestamp in UTC.
+            data_type: string
+
+      - name: splits
+        description: Historical stock split events for financial assets.
+        columns:
+          - name: id
+            description: Unique split record identifier.
+            data_type: string
+            tests:
+              - unique
+              - not_null
+          - name: execution_date
+            description: Execution date of the split event.
+            data_type: string
+          - name: split_from
+            description: Share ratio before split.
+            data_type: string
+          - name: split_to
+            description: Share ratio after split.
+            data_type: string
+          - name: ticker
+            description: Ticker symbol associated with split.
+            data_type: string
+            tests:
+              - not_null
+          - name: adjustment_type
+            description: Classification of split adjustment.
+            data_type: string
+          - name: historical_adjustment_factor
+            description: Factor used for adjusting historical prices.
+            data_type: string
+
+      - name: dividends
+        description: Dividend payment histories for listed assets.
+        columns:
+          - name: id
+            description: Unique dividend event identifier.
+            data_type: string
+            tests:
+              - unique
+              - not_null
+          - name: ticker
+            description: Symbol of dividend-issuing ticker.
+            data_type: string
+            tests:
+              - not_null
+          - name: record_date
+            description: Record date for dividend distribution.
+            data_type: string
+          - name: pay_date
+            description: Payment date for dividend distribution.
+            data_type: string
+          - name: ex_dividend_date
+            description: Ex-dividend date.
+            data_type: string
+          - name: frequency
+            description: Dividend payout frequency.
+            data_type: string
+          - name: cash_amount
+            description: Distributed cash amount per share.
+            data_type: string
+          - name: currency
+            description: Currency denomination of dividend payout.
+            data_type: string
+          - name: distribution_type
+            description: Type classification of dividend.
+            data_type: string
+          - name: declaration_date
+            description: Date dividend was formally declared.
+            data_type: string
+          - name: historical_adjustment_factor
+            description: Historical adjustment factor for dividend.
+            data_type: string
+          - name: split_adjusted_cash_amount
+            description: Dividend cash amount adjusted for historical splits.
+            data_type: string
+
       - name: condition_codes
-        description: Condition Codes Data
+        description: Market trade condition codes and aggregation mapping rules.
+        columns:
+          - name: id
+            description: Unique condition code identifier.
+            data_type: string
+            tests:
+              - unique
+              - not_null
+          - name: type
+            description: Category type of condition code.
+            data_type: string
+          - name: name
+            description: Name and description of condition code.
+            data_type: string
+          - name: asset_class
+            description: Target asset class for condition code.
+            data_type: string
+          - name: data_types
+            description: Associated data types impacted by condition.
+            data_type: string
+          - name: sip_mapping_UTP
+            description: SIP UTP mapping flag.
+            data_type: string
+          - name: update_rules_consolidated_updates_high_low
+            description: Consolidated high/low price update rule.
+            data_type: string
+          - name: update_rules_consolidated_updates_open_close
+            description: Consolidated open/close price update rule.
+            data_type: string
+          - name: update_rules_consolidated_updates_volume
+            description: Consolidated trade volume update rule.
+            data_type: string
+          - name: update_rules_market_center_updates_high_low
+            description: Market center high/low price update rule.
+            data_type: string
+          - name: update_rules_market_center_updates_open_close
+            description: Market center open/close price update rule.
+            data_type: string
+          - name: update_rules_market_center_updates_volume
+            description: Market center trade volume update rule.
+            data_type: string
+          - name: sip_mapping_CTA
+            description: SIP CTA mapping flag.
+            data_type: string
+          - name: sip_mapping_FINRA_TDDS
+            description: SIP FINRA TDDS mapping flag.
+            data_type: string
+          - name: legacy
+            description: Legacy condition status indicator.
+            data_type: string
+          - name: exchange
+            description: Exchange associated with condition code.
+            data_type: string
+
+      - name: exchanges
+        description: Exchange venues and trading participant infrastructure.
+        columns:
+          - name: id
+            description: Unique exchange identifier.
+            data_type: string
+            tests:
+              - unique
+              - not_null
+          - name: type
+            description: Structural classification type of exchange entity.
+            data_type: string
+          - name: asset_class
+            description: Supported asset class.
+            data_type: string
+          - name: locale
+            description: Geographic locale of trading venue.
+            data_type: string
+          - name: name
+            description: Full legal name of exchange.
+            data_type: string
+          - name: acronym
+            description: Shortened acronym for exchange.
+            data_type: string
+          - name: mic
+            description: Market Identifier Code.
+            data_type: string
+          - name: operating_mic
+            description: Operating Market Identifier Code.
+            data_type: string
+          - name: participant_id
+            description: Assigned participant identifier character.
+            data_type: string
+          - name: url
+            description: Web link to venue reference platform.
+            data_type: string
       - name: ticker_types
-        description: Ticker Types Data
+        description: Table containing metadata about various ticker types
+        columns:
+          - name: code
+            data_type: string
+            description: Ticker type code
+            data_tests:
+              - unique
+              - not_null
+          - name: description
+            data_type: string
+            description: Description of the ticker type
+          - name: asset_class
+            data_type: string
+            description: Asset class of the ticker type
+          - name: locale
+            data_type: string
+            description: Geographic locale or market
+
+      - name: short_interest
+        description: Table containing short interest reporting per ticker
+        columns:
+          - name: settlement_date
+            data_type: string
+            description: Settlement date for short interest reporting
+            data_tests:
+              - not_null
+          - name: ticker
+            data_type: string
+            description: Stock ticker symbol
+            data_tests:
+              - not_null
+          - name: short_interest
+            data_type: string
+            description: Total short interest volume
+          - name: avg_daily_volume
+            data_type: string
+            description: Average daily trading volume
+          - name: days_to_cover
+            data_type: string
+            description: Number of days required to cover short positions
+
+      - name: short_volume
+        description: Daily short volume aggregated across multiple exchanges
+        columns:
+          - name: ticker
+            data_type: string
+            description: Stock ticker symbol
+            data_tests:
+              - not_null
+          - name: date
+            data_type: string
+            description: Trading date
+            data_tests:
+              - not_null
+          - name: total_volume
+            data_type: string
+            description: Total trading volume
+          - name: short_volume
+            data_type: string
+            description: Total short volume
+          - name: exempt_volume
+            data_type: string
+            description: Exempt short volume
+          - name: non_exempt_volume
+            data_type: string
+            description: Non exempt short volume
+          - name: short_volume_ratio
+            data_type: string
+            description: Ratio of short volume to total volume
+          - name: nyse_short_volume
+            data_type: string
+            description: NYSE short volume
+          - name: nyse_short_volume_exempt
+            data_type: string
+            description: NYSE exempt short volume
+          - name: nasdaq_carteret_short_volume
+            data_type: string
+            description: NASDAQ Carteret short volume
+          - name: nasdaq_carteret_short_volume_exempt
+            data_type: string
+            description: NASDAQ Carteret exempt short volume
+          - name: nasdaq_chicago_short_volume
+            data_type: string
+            description: NASDAQ Chicago short volume
+          - name: nasdaq_chicago_short_volume_exempt
+            data_type: string
+            description: NASDAQ Chicago exempt short volume
+          - name: adf_short_volume
+            data_type: string
+            description: ADF short volume
+          - name: adf_short_volume_exempt
+            data_type: string
+            description: ADF exempt short volume
+
+      - name: floats
+        description: Table containing free float information and percentage calculations per ticker
+        columns:
+          - name: ticker
+            data_type: string
+            description: Stock ticker symbol
+            data_tests:
+              - not_null
+          - name: free_float
+            data_type: string
+            description: Number of free float shares available
+          - name: effective_date
+            data_type: string
+            description: Effective date of free float calculation
+          - name: free_float_percent
+            data_type: string
+            description: Percentage of total shares available as free float
