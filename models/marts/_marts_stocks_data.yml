@@ -1,200 +1,201 @@
-- name: ticker_dividend_date_summary
-  description: Summary of dividend payment timelines and date ranges per ticker symbol
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-        - unique
-    - name: min_days_to_pay_dividend_after_cutoff
-      description: Minimum days to pay dividend after cutoff date
-    - name: avg_days_to_pay_dividend_after_cutoff
-      description: Average days to pay dividend after cutoff date
-    - name: max_days_to_pay_dividend_after_cutoff
-      description: Maximum days to pay dividend after cutoff date
-    - name: min_days_to_pay_dividend_after_eligibility_identification
-      description: Minimum days to pay dividend after eligibility identification
-    - name: avg_days_to_pay_dividend_after_eligibility_identification
-      description: Average days to pay dividend after eligibility identification
-    - name: max_days_to_pay_dividend_after_eligibility_identification
-      description: Maximum days to pay dividend after eligibility identification
-    - name: min_days_since_last_dividend_paid
-      description: Minimum days elapsed since the last dividend was paid
-    - name: avg_days_since_last_dividend_paid
-      description: Average days elapsed since the last dividend was paid
-    - name: max_days_since_last_dividend_paid
-      description: Maximum days elapsed since the last dividend was paid
-    - name: first_record_date
-      description: Earliest recorded dividend record date
-    - name: last_record_date
-      description: Most recent recorded dividend record date
-    - name: first_pay_date
-      description: Earliest recorded dividend payment date
-    - name: last_pay_date
-      description: Most recent recorded dividend payment date
-    - name: first_ex_dividend_date
-      description: Earliest recorded ex-dividend date
-    - name: last_ex_dividend_date
-      description: Most recent recorded ex-dividend date
+models:
+  - name: ticker_dividend_date_summary
+    description: Summary of dividend payment timelines and date ranges per ticker symbol
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+          - unique
+      - name: min_days_to_pay_dividend_after_cutoff
+        description: Minimum days to pay dividend after cutoff date
+      - name: avg_days_to_pay_dividend_after_cutoff
+        description: Average days to pay dividend after cutoff date
+      - name: max_days_to_pay_dividend_after_cutoff
+        description: Maximum days to pay dividend after cutoff date
+      - name: min_days_to_pay_dividend_after_eligibility_identification
+        description: Minimum days to pay dividend after eligibility identification
+      - name: avg_days_to_pay_dividend_after_eligibility_identification
+        description: Average days to pay dividend after eligibility identification
+      - name: max_days_to_pay_dividend_after_eligibility_identification
+        description: Maximum days to pay dividend after eligibility identification
+      - name: min_days_since_last_dividend_paid
+        description: Minimum days elapsed since the last dividend was paid
+      - name: avg_days_since_last_dividend_paid
+        description: Average days elapsed since the last dividend was paid
+      - name: max_days_since_last_dividend_paid
+        description: Maximum days elapsed since the last dividend was paid
+      - name: first_record_date
+        description: Earliest recorded dividend record date
+      - name: last_record_date
+        description: Most recent recorded dividend record date
+      - name: first_pay_date
+        description: Earliest recorded dividend payment date
+      - name: last_pay_date
+        description: Most recent recorded dividend payment date
+      - name: first_ex_dividend_date
+        description: Earliest recorded ex-dividend date
+      - name: last_ex_dividend_date
+        description: Most recent recorded ex-dividend date
 
-- name: ticker_short_interests_final
-  description: Final bi-monthly short interest metric data per ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: short_interest
-      description: Total number of shares sold short
-    - name: avg_daily_volume
-      description: Average daily trading volume
-    - name: days_to_cover_fixed
-      description: Calculated days required to cover the short positions
-    - name: settlement_date
-      description: Settlement date of the short interest reporting period
-      tests:
-        - not_null
-    - name: first_settlement_date
-      description: First available settlement date for the ticker
-    - name: last_settlement_date
-      description: Latest available settlement date for the ticker
-    - name: days_since_last_cadence
-      description: Days elapsed since the previous reporting cadence date
+  - name: ticker_short_interests_final
+    description: Final bi-monthly short interest metric data per ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: short_interest
+        description: Total number of shares sold short
+      - name: avg_daily_volume
+        description: Average daily trading volume
+      - name: days_to_cover_fixed
+        description: Calculated days required to cover the short positions
+      - name: settlement_date
+        description: Settlement date of the short interest reporting period
+        tests:
+          - not_null
+      - name: first_settlement_date
+        description: First available settlement date for the ticker
+      - name: last_settlement_date
+        description: Latest available settlement date for the ticker
+      - name: days_since_last_cadence
+        description: Days elapsed since the previous reporting cadence date
 
-- name: ticker_short_volume_final
-  description: Daily short trading volume figures and venue proportions per ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: date
-      description: Trading date of the short volume record
-      tests:
-        - not_null
-    - name: first_short_volume_date_for_ticker
-      description: Earliest short volume date recorded for the ticker
-    - name: most_recent_short_volume_date_for_ticker
-      description: Latest short volume date recorded for the ticker
-    - name: days_since_last_short_volume
-      description: Days elapsed since the previous short volume record date
-    - name: total_volume
-      description: Total traded volume on the specified date
-    - name: short_volume
-      description: Total short volume traded on the specified date
-    - name: short_volume_ratio
-      description: Percentage ratio of short volume to total volume
-    - name: running_total_volume
-      description: Cumulative total traded volume
-    - name: running_short_volume
-      description: Cumulative short traded volume
-    - name: running_short_volume_ratio
-      description: Cumulative ratio of short volume to total volume
-    - name: running_total_nyse_short_volume
-      description: Cumulative short volume traded on NYSE
-    - name: running_short_volume_that_is_nyse_ratio
-      description: Proportion of cumulative short volume executed on NYSE
-    - name: running_total_nasdaq_carteret_short_volume
-      description: Cumulative short volume traded on Nasdaq Carteret
-    - name: running_short_volume_that_is_nasdaq_carteret_ratio
-      description: Proportion of cumulative short volume executed on Nasdaq Carteret
-    - name: running_total_nasdaq_chicago_short_volume
-      description: Cumulative short volume traded on Nasdaq Chicago
-    - name: running_short_volume_that_is_nasdaq_chicago_ratio
-      description: Proportion of cumulative short volume executed on Nasdaq Chicago
-    - name: running_total_adf_short_volume
-      description: Cumulative short volume traded on ADF exchange
-    - name: running_short_volume_that_is_adf_ratio
-      description: Proportion of cumulative short volume executed on ADF exchange
+  - name: ticker_short_volume_final
+    description: Daily short trading volume figures and venue proportions per ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: date
+        description: Trading date of the short volume record
+        tests:
+          - not_null
+      - name: first_short_volume_date_for_ticker
+        description: Earliest short volume date recorded for the ticker
+      - name: most_recent_short_volume_date_for_ticker
+        description: Latest short volume date recorded for the ticker
+      - name: days_since_last_short_volume
+        description: Days elapsed since the previous short volume record date
+      - name: total_volume
+        description: Total traded volume on the specified date
+      - name: short_volume
+        description: Total short volume traded on the specified date
+      - name: short_volume_ratio
+        description: Percentage ratio of short volume to total volume
+      - name: running_total_volume
+        description: Cumulative total traded volume
+      - name: running_short_volume
+        description: Cumulative short traded volume
+      - name: running_short_volume_ratio
+        description: Cumulative ratio of short volume to total volume
+      - name: running_total_nyse_short_volume
+        description: Cumulative short volume traded on NYSE
+      - name: running_short_volume_that_is_nyse_ratio
+        description: Proportion of cumulative short volume executed on NYSE
+      - name: running_total_nasdaq_carteret_short_volume
+        description: Cumulative short volume traded on Nasdaq Carteret
+      - name: running_short_volume_that_is_nasdaq_carteret_ratio
+        description: Proportion of cumulative short volume executed on Nasdaq Carteret
+      - name: running_total_nasdaq_chicago_short_volume
+        description: Cumulative short volume traded on Nasdaq Chicago
+      - name: running_short_volume_that_is_nasdaq_chicago_ratio
+        description: Proportion of cumulative short volume executed on Nasdaq Chicago
+      - name: running_total_adf_short_volume
+        description: Cumulative short volume traded on ADF exchange
+      - name: running_short_volume_that_is_adf_ratio
+        description: Proportion of cumulative short volume executed on ADF exchange
 
-- name: ticker_floats_date_exchange_ticker_type
-  description: Free float information, primary exchange details, and asset classification per ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-        - unique
-    - name: name
-      description: Full name of the company or fund
-    - name: market
-      description: High-level market category
-    - name: locale
-      description: Geographic region or country code of origin
-    - name: primary_exchange
-      description: Operating MIC code of the primary listing exchange
-    - name: exchange_name
-      description: Full name of the primary listing exchange
-    - name: exchange_type
-      description: Type of financial venue or exchange structure
-    - name: exchange_acronym
-      description: Standardized acronym for the primary exchange
-    - name: exchange_operating_mic
-      description: Operating MIC code of the primary exchange
-    - name: type
-      description: Asset class code
-    - name: description
-      description: Descriptive details of the asset type
-    - name: active
-      description: Boolean indicator showing if the ticker is active
-    - name: currency_name
-      description: Trading currency unit
-    - name: last_updated_utc_date
-      description: Date when the ticker details were last updated in UTC
-    - name: free_float
-      description: Total float share count available for trading
-    - name: effective_date
-      description: Effective date of the free float metrics
-    - name: free_float_percent
-      description: Percentage of total shares in free float status
-    - name: days_since_last_float
-      description: Days elapsed since the previous float update
+  - name: ticker_floats_date_exchange_ticker_type
+    description: Free float information, primary exchange details, and asset classification per ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: Full name of the company or fund
+      - name: market
+        description: High-level market category
+      - name: locale
+        description: Geographic region or country code of origin
+      - name: primary_exchange
+        description: Operating MIC code of the primary listing exchange
+      - name: exchange_name
+        description: Full name of the primary listing exchange
+      - name: exchange_type
+        description: Type of financial venue or exchange structure
+      - name: exchange_acronym
+        description: Standardized acronym for the primary exchange
+      - name: exchange_operating_mic
+        description: Operating MIC code of the primary exchange
+      - name: type
+        description: Asset class code
+      - name: description
+        description: Descriptive details of the asset type
+      - name: active
+        description: Boolean indicator showing if the ticker is active
+      - name: currency_name
+        description: Trading currency unit
+      - name: last_updated_utc_date
+        description: Date when the ticker details were last updated in UTC
+      - name: free_float
+        description: Total float share count available for trading
+      - name: effective_date
+        description: Effective date of the free float metrics
+      - name: free_float_percent
+        description: Percentage of total shares in free float status
+      - name: days_since_last_float
+        description: Days elapsed since the previous float update
 
-- name: ticker_split_dividend_count
-  description: Summary count of historical splits and dividend occurrences per ticker symbol
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-        - unique
-    - name: name
-      description: Full name of the company or asset entity
-    - name: market
-      description: Market classification
-    - name: locale
-      description: Geographic locale identifier
-    - name: primary_exchange
-      description: Primary listing exchange code
-    - name: type
-      description: Asset type code
-    - name: count_dividends
-      description: Total count of recorded dividend events
-    - name: count_splits
-      description: Total count of recorded stock split events
+  - name: ticker_split_dividend_count
+    description: Summary count of historical splits and dividend occurrences per ticker symbol
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: Full name of the company or asset entity
+      - name: market
+        description: Market classification
+      - name: locale
+        description: Geographic locale identifier
+      - name: primary_exchange
+        description: Primary listing exchange code
+      - name: type
+        description: Asset type code
+      - name: count_dividends
+        description: Total count of recorded dividend events
+      - name: count_splits
+        description: Total count of recorded stock split events
 
-- name: ticker_split_date_summary
-  description: Detailed summary of historical stock split occurrences, ratios, and adjustment factors per ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: execution_date
-      description: Execution date of the stock split event
-      tests:
-        - not_null
-    - name: days_since_last_split
-      description: Days elapsed since the last split execution date
-    - name: days_since_last_similar_type_of_split
-      description: Days elapsed since the last split of the same split type
-    - name: type_of_split
-      description: Classification of split event
-    - name: split_from
-      description: Pre-split denominator ratio unit
-    - name: split_to
-      description: Post-split numerator ratio unit
-    - name: historical_adjustment_factor_makes_sense
-      description: Flag indicating if the computed factor aligns with expect split ratios
-    - name: historical_adjustment_factor
-      description: Numerical factor used for price and volume historical adjustments
+  - name: ticker_split_date_summary
+    description: Detailed summary of historical stock split occurrences, ratios, and adjustment factors per ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: execution_date
+        description: Execution date of the stock split event
+        tests:
+          - not_null
+      - name: days_since_last_split
+        description: Days elapsed since the last split execution date
+      - name: days_since_last_similar_type_of_split
+        description: Days elapsed since the last split of the same split type
+      - name: type_of_split
+        description: Classification of split event
+      - name: split_from
+        description: Pre-split denominator ratio unit
+      - name: split_to
+        description: Post-split numerator ratio unit
+      - name: historical_adjustment_factor_makes_sense
+        description: Flag indicating if the computed factor aligns with expect split ratios
+      - name: historical_adjustment_factor
+        description: Numerical factor used for price and volume historical adjustments
