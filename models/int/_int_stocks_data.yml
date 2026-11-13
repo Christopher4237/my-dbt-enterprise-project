@@ -1,238 +1,239 @@
-- name: dividends_and_splits_not_active
-  description: Tickers with dividend activity not found in splits or master ticker list
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: missing_status
-      description: Reason describing missing status of ticker
-      tests:
-        - not_null
+models:
+  - name: dividends_and_splits_not_active
+    description: Tickers with dividend activity not found in splits or master ticker list
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: missing_status
+        description: Reason describing missing status of ticker
+        tests:
+          - not_null
 
-- name: dividends_date_info
-  description: Dividend payout dates and calculated timing metrics per ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: record_date
-      description: Record date for dividend eligibility
-    - name: pay_date
-      description: Payment date for dividend
-    - name: ex_dividend_date
-      description: Ex-dividend date
-    - name: declaration_date
-      description: Declaration date of dividend
-    - name: days_to_pay_dividend_after_cutoff
-      description: Days to pay dividend after cutoff date
-    - name: days_to_pay_dividend_after_eligibility_identification
-      description: Days to pay dividend after eligibility identification
-    - name: days_since_last_dividend_paid
-      description: Days elapsed since previous dividend payment
-    - name: cash_amount
-      description: Cash amount distributed per share
+  - name: dividends_date_info
+    description: Dividend payout dates and calculated timing metrics per ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: record_date
+        description: Record date for dividend eligibility
+      - name: pay_date
+        description: Payment date for dividend
+      - name: ex_dividend_date
+        description: Ex-dividend date
+      - name: declaration_date
+        description: Declaration date of dividend
+      - name: days_to_pay_dividend_after_cutoff
+        description: Days to pay dividend after cutoff date
+      - name: days_to_pay_dividend_after_eligibility_identification
+        description: Days to pay dividend after eligibility identification
+      - name: days_since_last_dividend_paid
+        description: Days elapsed since previous dividend payment
+      - name: cash_amount
+        description: Cash amount distributed per share
 
-- name: floats_int
-  description: Free float share metrics and percentages by ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: free_float
-      description: Total number of free float shares
-    - name: effective_date
-      description: Effective date of free float measurement
-    - name: free_float_percent
-      description: Percentage of total shares floating freely
+  - name: floats_int
+    description: Free float share metrics and percentages by ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: free_float
+        description: Total number of free float shares
+      - name: effective_date
+        description: Effective date of free float measurement
+      - name: free_float_percent
+        description: Percentage of total shares floating freely
 
-- name: short_interests_date_info
-  description: Historical short interest position and daily volume metrics by settlement date
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: short_interest
-      description: Reported short interest share count
-    - name: avg_daily_volume
-      description: Average daily trading volume
-    - name: settlement_date
-      description: Settlement date for short interest report
-      tests:
-        - not_null
-    - name: first_settlement_date
-      description: Earliest recorded settlement date for ticker
-    - name: last_settlement_date
-      description: Most recent settlement date for ticker
+  - name: short_interests_date_info
+    description: Historical short interest position and daily volume metrics by settlement date
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: short_interest
+        description: Reported short interest share count
+      - name: avg_daily_volume
+        description: Average daily trading volume
+      - name: settlement_date
+        description: Settlement date for short interest report
+        tests:
+          - not_null
+      - name: first_settlement_date
+        description: Earliest recorded settlement date for ticker
+      - name: last_settlement_date
+        description: Most recent settlement date for ticker
 
-- name: short_volume_info
-  description: Daily breakdown of short trading volume across exchanges and venues
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: date
-      description: Trading date
-      tests:
-        - not_null
-    - name: first_short_volume_date_for_ticker
-      description: First date short volume was recorded for ticker
-    - name: most_recent_short_volume_date_for_ticker
-      description: Most recent date short volume was recorded for ticker
-    - name: total_volume
-      description: Total trading volume across venues
-    - name: short_volume
-      description: Total short volume across venues
-    - name: exempt_volume
-      description: Exempt short trading volume
-    - name: non_exempt_volume
-      description: Non-exempt short trading volume
-    - name: short_volume_ratio
-      description: Percentage ratio of short volume to total volume
-    - name: nyse_short_volume
-      description: Short volume on NYSE venue
-    - name: nyse_short_volume_exempt
-      description: Exempt short volume on NYSE venue
-    - name: nasdaq_carteret_short_volume
-      description: Short volume on Nasdaq Carteret venue
-    - name: nasdaq_carteret_short_volume_exempt
-      description: Exempt short volume on Nasdaq Carteret venue
-    - name: nasdaq_chicago_short_volume
-      description: Short volume on Nasdaq Chicago venue
-    - name: nasdaq_chicago_short_volume_exempt
-      description: Exempt short volume on Nasdaq Chicago venue
-    - name: adf_short_volume
-      description: Short volume on Alternative Display Facility
-    - name: adf_short_volume_exempt
-      description: Exempt short volume on Alternative Display Facility
+  - name: short_volume_info
+    description: Daily breakdown of short trading volume across exchanges and venues
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: date
+        description: Trading date
+        tests:
+          - not_null
+      - name: first_short_volume_date_for_ticker
+        description: First date short volume was recorded for ticker
+      - name: most_recent_short_volume_date_for_ticker
+        description: Most recent date short volume was recorded for ticker
+      - name: total_volume
+        description: Total trading volume across venues
+      - name: short_volume
+        description: Total short volume across venues
+      - name: exempt_volume
+        description: Exempt short trading volume
+      - name: non_exempt_volume
+        description: Non-exempt short trading volume
+      - name: short_volume_ratio
+        description: Percentage ratio of short volume to total volume
+      - name: nyse_short_volume
+        description: Short volume on NYSE venue
+      - name: nyse_short_volume_exempt
+        description: Exempt short volume on NYSE venue
+      - name: nasdaq_carteret_short_volume
+        description: Short volume on Nasdaq Carteret venue
+      - name: nasdaq_carteret_short_volume_exempt
+        description: Exempt short volume on Nasdaq Carteret venue
+      - name: nasdaq_chicago_short_volume
+        description: Short volume on Nasdaq Chicago venue
+      - name: nasdaq_chicago_short_volume_exempt
+        description: Exempt short volume on Nasdaq Chicago venue
+      - name: adf_short_volume
+        description: Short volume on Alternative Display Facility
+      - name: adf_short_volume_exempt
+        description: Exempt short volume on Alternative Display Facility
 
-- name: splits_date_info
-  description: Stock split history details and calculated adjustment factors
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: execution_date
-      description: Execution date of stock split
-      tests:
-        - not_null
-    - name: days_since_last_split
-      description: Days elapsed since prior stock split
-    - name: type_of_split
-      description: Classification of split type
-    - name: historical_adjustment_factor
-      description: Calculated historical price adjustment factor
-    - name: split_from
-      description: Pre-split share ratio denominator
-    - name: split_to
-      description: Post-split share ratio numerator
-    - name: historical_adjustment_factor_makes_sense
-      description: Flag confirming consistency of adjustment factor
+  - name: splits_date_info
+    description: Stock split history details and calculated adjustment factors
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: execution_date
+        description: Execution date of stock split
+        tests:
+          - not_null
+      - name: days_since_last_split
+        description: Days elapsed since prior stock split
+      - name: type_of_split
+        description: Classification of split type
+      - name: historical_adjustment_factor
+        description: Calculated historical price adjustment factor
+      - name: split_from
+        description: Pre-split share ratio denominator
+      - name: split_to
+        description: Post-split share ratio numerator
+      - name: historical_adjustment_factor_makes_sense
+        description: Flag confirming consistency of adjustment factor
 
-- name: splits_date_info_similar_type
-  description: Stock split execution tracking filtered by similar split type
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - not_null
-    - name: execution_date
-      description: Execution date of stock split
-      tests:
-        - not_null
-    - name: days_since_last_similar_type_of_split
-      description: Days elapsed since last split of identical type
-    - name: type_of_split
-      description: Classification of split type
-    - name: historical_adjustment_factor
-      description: Historical price adjustment factor
+  - name: splits_date_info_similar_type
+    description: Stock split execution tracking filtered by similar split type
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - not_null
+      - name: execution_date
+        description: Execution date of stock split
+        tests:
+          - not_null
+      - name: days_since_last_similar_type_of_split
+        description: Days elapsed since last split of identical type
+      - name: type_of_split
+        description: Classification of split type
+      - name: historical_adjustment_factor
+        description: Historical price adjustment factor
 
-- name: ticker_data_w_types
-  description: Comprehensive master ticker metadata with security types and exchange details
-  columns:
-    - name: ticker
-      description: Primary unique ticker identifier
-      tests:
-        - unique
-        - not_null
-    - name: name
-      description: Full name of security or organization
-    - name: market
-      description: Broad market category
-    - name: locale
-      description: Regional market jurisdiction
-    - name: primary_exchange
-      description: Primary listing exchange identifier
-    - name: exchange_name
-      description: Full name of primary listing exchange
-    - name: exchange_type
-      description: Classification of exchange structure
-    - name: exchange_acronym
-      description: Acronym identifier of exchange
-    - name: exchange_operating_mic
-      description: Market Identifier Code of operating exchange
-    - name: type
-      description: Asset or security type code
-    - name: description
-      description: Verbose description of security type
-    - name: active
-      description: Status indicating if security actively trades
-    - name: currency_name
-      description: Base currency name of security denomination
-    - name: last_updated_utc_date
-      description: Timestamp of latest metadata update in UTC
+  - name: ticker_data_w_types
+    description: Comprehensive master ticker metadata with security types and exchange details
+    columns:
+      - name: ticker
+        description: Primary unique ticker identifier
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: Full name of security or organization
+      - name: market
+        description: Broad market category
+      - name: locale
+        description: Regional market jurisdiction
+      - name: primary_exchange
+        description: Primary listing exchange identifier
+      - name: exchange_name
+        description: Full name of primary listing exchange
+      - name: exchange_type
+        description: Classification of exchange structure
+      - name: exchange_acronym
+        description: Acronym identifier of exchange
+      - name: exchange_operating_mic
+        description: Market Identifier Code of operating exchange
+      - name: type
+        description: Asset or security type code
+      - name: description
+        description: Verbose description of security type
+      - name: active
+        description: Status indicating if security actively trades
+      - name: currency_name
+        description: Base currency name of security denomination
+      - name: last_updated_utc_date
+        description: Timestamp of latest metadata update in UTC
 
-- name: ticker_dividends_by_currency
-  description: Summary of dividend distributions and counts per ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - unique
-        - not_null
-    - name: name
-      description: Full security name
-    - name: market
-      description: Broad market classification
-    - name: locale
-      description: Geographic region code
-    - name: primary_exchange
-      description: Primary listing exchange symbol
-    - name: type
-      description: Asset classification code
-    - name: dividend_count
-      description: Cumulative total of recorded dividend events
-    - name: distribution_type
-      description: Recurring or special dividend distribution category
-    - name: status
-      description: Operational tracking status of ticker
+  - name: ticker_dividends_by_currency
+    description: Summary of dividend distributions and counts per ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: Full security name
+      - name: market
+        description: Broad market classification
+      - name: locale
+        description: Geographic region code
+      - name: primary_exchange
+        description: Primary listing exchange symbol
+      - name: type
+        description: Asset classification code
+      - name: dividend_count
+        description: Cumulative total of recorded dividend events
+      - name: distribution_type
+        description: Recurring or special dividend distribution category
+      - name: status
+        description: Operational tracking status of ticker
 
-- name: ticker_splits
-  description: Summary of stock split events and adjustment types per ticker
-  columns:
-    - name: ticker
-      description: Stock ticker symbol
-      tests:
-        - unique
-        - not_null
-    - name: name
-      description: Full security name
-    - name: market
-      description: Broad market classification
-    - name: locale
-      description: Geographic region code
-    - name: primary_exchange
-      description: Primary listing exchange symbol
-    - name: type
-      description: Asset classification code
-    - name: split_count
-      description: Cumulative total of recorded split events
-    - name: adjustment_type
-      description: Primary adjustment classification of stock split
-    - name: status
-      description: Operational tracking status of ticker
+  - name: ticker_splits
+    description: Summary of stock split events and adjustment types per ticker
+    columns:
+      - name: ticker
+        description: Stock ticker symbol
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: Full security name
+      - name: market
+        description: Broad market classification
+      - name: locale
+        description: Geographic region code
+      - name: primary_exchange
+        description: Primary listing exchange symbol
+      - name: type
+        description: Asset classification code
+      - name: split_count
+        description: Cumulative total of recorded split events
+      - name: adjustment_type
+        description: Primary adjustment classification of stock split
+      - name: status
+        description: Operational tracking status of ticker
