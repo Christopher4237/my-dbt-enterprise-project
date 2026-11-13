@@ -5,13 +5,17 @@
     )
 }}
 
+with floats as (
+    select 
+        ticker,
+        free_float,
+        effective_date,
+        free_float_percent
 
-select 
-    ticker,
-    free_float,
-    effective_date,
-    free_float_percent
+    from {{ source('stocks_data', 'floats') }}
 
-from {{ source('stocks_data', 'floats') }}
+    where ticker like 'A%'
 
-where ticker like 'A%'
+)
+
+select * from floats
