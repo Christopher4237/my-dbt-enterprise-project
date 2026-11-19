@@ -2,7 +2,8 @@
     config(
         materialized='incremental',
         unique_key='ticker',
-        on_schema_change='append_new_columns'
+        on_schema_change='append_new_columns',
+        incremental_strategy='delete+insert'
     )
 }}
 

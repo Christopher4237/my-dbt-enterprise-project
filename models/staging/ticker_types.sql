@@ -1,7 +1,8 @@
 {{
     config(
         materialized='incremental',
-        unique_key='code'
+        unique_key='code',
+        incremental_strategy='delete+insert'
     )
 }}
 
