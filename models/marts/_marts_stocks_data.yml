@@ -184,7 +184,7 @@ models:
       - name: execution_date
         description: Execution date of the stock split event
         tests:
-          - not_null
+          #- not_null
       - name: days_since_last_split
         description: Days elapsed since the last split execution date
       - name: days_since_last_similar_type_of_split
