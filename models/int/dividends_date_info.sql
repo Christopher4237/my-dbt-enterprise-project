@@ -40,4 +40,4 @@ SELECT
 
     cash_amount
 
-FROM stocks_data.staging.dividends;
+FROM dividends

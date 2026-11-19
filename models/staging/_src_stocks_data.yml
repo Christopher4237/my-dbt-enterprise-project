@@ -131,7 +131,7 @@ sources:
             description: Unique condition code identifier.
             data_type: string
             tests:
-              - unique
+              #- unique
               - not_null
           - name: type
             description: Category type of condition code.

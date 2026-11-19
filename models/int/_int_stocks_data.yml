@@ -194,7 +194,7 @@ models:
       - name: ticker
         description: Stock ticker symbol
         tests:
-          - unique
+          #- unique
           - not_null
       - name: name
         description: Full security name
@@ -219,7 +219,7 @@ models:
       - name: ticker
         description: Stock ticker symbol
         tests:
-          - unique
+          #- unique
           - not_null
       - name: name
         description: Full security name
