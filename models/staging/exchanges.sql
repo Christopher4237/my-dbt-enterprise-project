@@ -1,7 +1,8 @@
 {{
     config(
         materialized='incremental',
-        unique_key='exchange_id'
+        unique_key='exchange_id',
+        incremental_strategy='delete+insert'
     )
 }}
 

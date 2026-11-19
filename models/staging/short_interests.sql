@@ -1,7 +1,8 @@
 {{
     config(
         materialized='incremental',
-        unique_key=['ticker', 'settlement_date']
+        unique_key=['ticker', 'settlement_date'],
+        incremental_strategy='delete+insert'
     )
 }}
 
