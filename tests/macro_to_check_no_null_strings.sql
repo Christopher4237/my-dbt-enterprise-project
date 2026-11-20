@@ -1,0 +1,1 @@
+{{ macro_to_check_no_null_strings(schema='staging') }}
